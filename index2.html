@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MTBank Mobile Game</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <div class="phone-container">
+        <header class="header">
+            <div class="status-item"> 1,250</div>
+            <div class="status-item">💎 10</div>
+            <div class="status-item">⭐️ 5 LVL</div>
+        </header>
+
+        <main id="screen-home" class="tab-content active">
+            <div class="game-area">
+                <div class="room-container">
+                    <iframe src="https://rooms.xyz/samuymalost/mtd" allow="camera; microphone; fullscreen; xr-spatial-tracking; autoplay; gyroscope; accelerometer"></iframe>
+                </div>
+                <aside class="sidebar-right">
+                    <div class="side-item"><div class="side-icon">📰</div><div class="side-text">Инфо</div></div>
+                    <div class="side-item"><div class="side-icon">🛒</div><div class="side-text">Шоп</div></div>
+                    <div class="side-item"><div class="side-icon">✉️</div><div class="side-text">Почта</div></div>
+                </aside>
+            </div>
+        </main>
+
+        <div id="screen-game" class="tab-content">
+            <h2 class="home-title">Мини-игры</h2>
+            <p style="color: white;">Здесь скоро появятся задания МТБанка</p>
+        </div>
+
+        <div id="screen-top" class="tab-content">
+            <h2 class="home-title">Лидерборд</h2>
+            <p style="color: white;">Топ игроков Лошицы и Минска</p>
+        </div>
+
+        <div id="screen-friends" class="tab-content">
+            <h2 class="home-title">Друзья</h2>
+            <p style="color: white;">Приглашай корешей — получай 💎</p>
+        </div>
+
+        <div id="screen-stonks" class="tab-content">
+            <h2 class="home-title">Маркет</h2>
+            <p style="color: white;">Курсы валют и акции МТБанка</p>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active" data-target="home">
+                <div class="nav-icon">🏠</div><div class="nav-text">Дом</div>
+            </a>
+            <a href="#" class="nav-item" data-target="game">
+                <div class="nav-icon">🎲</div><div class="nav-text">Игра</div>
+            </a>
+            <a href="#" class="nav-item" data-target="top">
+                <div class="nav-icon">🏆</div><div class="nav-text">Топ</div>
+            </a>
+            <a href="#" class="nav-item" data-target="friends">
+                <div class="nav-icon">👥</div><div class="nav-text">Друзья</div>
+            </a>
+            <a href="#" class="nav-item" data-target="stonks">
+                <div class="nav-icon">📈</div><div class="nav-text">Стонкс</div>
+            </a>
+        </nav>
+    </div>
+    <script>
+        // ЛОГИКА ПЕРЕКЛЮЧЕНИЯ
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // 1. Снимаем актив со всех кнопок
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                // 2. Делаем активной нажатую
+                this.classList.add('active');
+
+                // 3. Скрываем все экраны
+                document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+
+                // 4. Показываем нужный экран по data-target
+                const targetId = this.getAttribute('data-target');
+                document.getElementById('screen-' + targetId).classList.add('active');
+                
+                // Вибрация (для мобилок)
+                if (window.navigator.vibrate) window.navigator.vibrate(10);
+            });
+        });
+    </script>
+</body>
+</html>
